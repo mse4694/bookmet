@@ -17,11 +17,12 @@
 <script>
 //import {Link} from '@inertiajs/inertia-vue3';
 import Header from '@/Components/Layouts/Header';
+import {Head} from '@inertiajs/inertia-vue3';
 import NavSideBar from '@/Components/Layouts/NavSideBar';
 
 export default {
     components: {
-        Header, NavSideBar
+        Header, Head, NavSideBar
     }
 }
 </script>
