@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen flex items-start justify-left bg-green-200 py-1">
+    <div class="h-full flex items-start justify-left bg-green-100 py-1">
 		<div class="flex w-full max-w-xs p-2 h-full bg-white">
 			<ul class="flex flex-col w-full">
 				<li class="my-px">

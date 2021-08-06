@@ -1,7 +1,13 @@
 <template>
   <main>
     <!-- <header class="text-gray-600 body-font"></header> -->
-      <div class="container w-max mx-2 flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <div class="container w-max ml-2 flex flex-wrap p-5 flex-0 md:flex-row items-center">
+        <label for="menu-toggle" class="cursor-pointer md:hidden block mr-3">
+            <svg class="fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+               <title>menu</title>
+               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+        </label>
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             class="w-10 h-10" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
           <circle style="fill:#324A5E;" cx="256" cy="256" r="256"/>
