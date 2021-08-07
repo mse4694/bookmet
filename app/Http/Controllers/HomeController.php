@@ -33,6 +33,11 @@ class HomeController extends Controller
         return Inertia::render('Primevue/InputGroup'); 
     }
 
+    public function list_reserv_calendar()
+    { 
+        return Inertia::render('ListReservCalendar/Index'); 
+    }
+
     /**
      * Show the form for creating a new resource.
      *

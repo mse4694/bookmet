@@ -3,7 +3,7 @@
 		<div class="flex w-full max-w-xs p-2 h-full bg-white">
 			<ul class="flex flex-col w-full">
 				<li class="my-px">
-					<Link href="/"
+					<Link href="/about"
 					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-gray-400">
 							<!-- <svg fill="none"
@@ -22,7 +22,7 @@
 					</Link>
 				</li>
                 <li class="my-px">
-					<Link href="/about"
+					<Link href="/"
 					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-gray-400">
 							<!-- <svg fill="none"
@@ -58,13 +58,13 @@
 					</a>
 				</li>
 				<li class="my-px">
-					<a href="#"
+					<Link href="/list_reserv_calendar"
 					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-gray-400">
 							<i class="pi pi-calendar-plus"></i>
 						</span>
 						<span class="ml-3">ปฎิทิน</span>
-					</a>
+					</Link>
 				</li>
 				<!-- <li class="my-px">
 					<span class="flex font-medium text-sm text-gray-400 px-4 my-4 uppercase">Primevue</span>
