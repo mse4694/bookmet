@@ -9,8 +9,9 @@
 <script>
 import { ref, onMounted } from 'vue';
 import Layout from '@/Components/Layouts/Layout';
-import '@fullcalendar/core/vdom' // solves problem with Vite
-import FullCalendar from '@fullcalendar/vue3'
+//import '@fullcalendar/core/vdom' // solves problem with Vite
+import FullCalendar from 'primevue/fullcalendar';
+//import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'
@@ -25,8 +26,9 @@ export default {
         onMounted(() => {
             eventService.value.getEvents().then(data => {
                 events.value = data;
-                console.log(data);
-                console.log(events.value);
+                // console.log(data);
+                // console.log(eventService.value.getEvents());
+                // console.log(events.value);
             });
         })
 
@@ -56,7 +58,7 @@ export default {
             //     {"id": 11,"title": "Birthday Party","start": "2021-08-13T07:00:00"},
             //     {"id": 12,"title": "Click for Google","url": "https://www.google.com/","start": "2021-08-28"}
             // ], 
-            //dayMaxEvents: true,
+            dayMaxEvents: true,
             //dateClick: this.handleDateClick,
             dateClick: function(info) {
                 alert('Clicked on: ' + info.dateStr);
@@ -71,12 +73,11 @@ export default {
                 //alert('View: ' + info.view.type);
 
                 // change the border color just for fun
-                info.el.style.borderColor = 'red';
+                //info.el.style.borderColor = 'red';
             }
         });
         const events =  ref(null);
         const eventService = ref(new EventService());
-        
         return { calendarOptions, events, eventService };
     },
 }
