@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Layout from '@/Components/Layouts/Layout';
 import { ref, onMounted } from 'vue';
+import Layout from '@/Components/Layouts/Layout';
 import '@fullcalendar/core/vdom' // solves problem with Vite
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -23,24 +23,25 @@ export default {
     },
     setup() {
         onMounted(() => {
-            eventService.value.getEvents().then(data => console.log(data));
-            eventService.value.getEvents().then(data => events.value = data);
+            eventService.value.getEvents().then(data => {
+                events.value = data;
+                console.log(data);
+                console.log(events.value);
+            });
         })
 
         const calendarOptions =  ref({
             plugins:[dayGridPlugin, timeGridPlugin, interactionPlugin],
             locale: thLocale,
-            initialDate : '2021-08-01',
+            //initialDate : '2021-08-01',
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            editable: true,
+            //editable: true,
             //selectable:true, 
-            // selectMirror: true, 
-            dayMaxEvents: true,
-            //dateClick: this.handleDateClick,
+            //selectMirror: true,
             // events: [
             //     {"id": 1,"title": "All Day Event","start": "2021-08-01"},
             //     {"id": 2,"title": "Long Event","start": "2021-08-07","end": "2021-08-10"},
@@ -54,28 +55,29 @@ export default {
             //     {"id": 10,"title": "Dinner","start": "2021-08-12T20:00:00"},
             //     {"id": 11,"title": "Birthday Party","start": "2021-08-13T07:00:00"},
             //     {"id": 12,"title": "Click for Google","url": "https://www.google.com/","start": "2021-08-28"}
-            // ],
-            // dateClick: function(info) {
-            //     alert('Clicked on: ' + info.dateStr);
-            //     alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-            //     alert('Current view: ' + info.view.type);
-            //     // change the day's background color just for fun
-            //     info.dayEl.style.backgroundColor = 'red';
-            // },
+            // ], 
+            //dayMaxEvents: true,
+            //dateClick: this.handleDateClick,
+            dateClick: function(info) {
+                alert('Clicked on: ' + info.dateStr);
+                // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                // alert('Current view: ' + info.view.type);
+                // Comment change the day's background color just for fun
+                //info.dayEl.style.backgroundColor = 'red';
+            },
             eventClick: function(info) {
                 alert('Event: ' + info.event.title);
-                alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-                alert('View: ' + info.view.type);
+                //alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                //alert('View: ' + info.view.type);
 
                 // change the border color just for fun
                 info.el.style.borderColor = 'red';
-            },
+            }
         });
-        
-        const eventService = ref(new EventService());
         const events =  ref(null);
-
-        return { calendarOptions, events, eventService, };
+        const eventService = ref(new EventService());
+        
+        return { calendarOptions, events, eventService };
     },
 }
 </script>
