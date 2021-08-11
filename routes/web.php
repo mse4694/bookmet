@@ -18,8 +18,10 @@ use App\Http\Controllers\HomeController;
 //     return view('welcome');
 // });
 
+// Route สำหรับ Linke Menu
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/primevue', [HomeController::class, 'primevue'])->name('primevue');
 Route::get('/primevue/inputgroup', [HomeController::class, 'inputgroup'])->name('inputgroup');
 Route::get('/list_reserv_calendar', [HomeController::class, 'list_reserv_calendar'])->name('list_reserv_calendar');
+Route::get('/booking_monitor', [HomeController::class, 'booking_monitor'])->name('booking_monitor');

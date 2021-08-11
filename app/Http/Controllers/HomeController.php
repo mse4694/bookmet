@@ -38,6 +38,11 @@ class HomeController extends Controller
         return Inertia::render('ListReservCalendar/Index'); 
     }
 
+    public function booking_monitor()
+    { 
+        return Inertia::render('BookingMonitor/Index'); 
+    }
+
     /**
      * Show the form for creating a new resource.
      *
