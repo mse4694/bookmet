@@ -1,9 +1,9 @@
 <template>
     <div class="h-full flex items-start justify-left bg-green-100 py-1">
-		<div class="flex w-full max-w-xs p-2 h-full bg-white">
+		<div class="flex w-full h-full max-w-sm p-2 bg-white">
 			<ul class="flex flex-col w-full">
 				<li class="my-px">
-					<Link href="/about"
+					<Link href="/"
 					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-gray-400">
 							<!-- <svg fill="none"
@@ -22,7 +22,7 @@
 					</Link>
 				</li>
                 <li class="my-px">
-					<Link href="/"
+					<Link href="/booking_room"
 					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-gray-400">
 							<!-- <svg fill="none"
@@ -58,7 +58,7 @@
 					</Link>
 				</li>
 				<li class="my-px">
-					<Link href="/list_reserv_calendar"
+					<Link href="/calendar"
 					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-gray-400">
 							<i class="pi pi-calendar-plus"></i>
@@ -212,6 +212,31 @@
 					</a>
 				</li> -->
 				<li class="my-px">
+					<span class="flex font-medium text-xl text-gray-400 px-4 my-4 uppercase">ส่วนผู้ควบคุม</span>
+				</li>
+                <li class="my-px">
+					<!-- <Toolbar>
+						<template #left>
+							<SplitButton label="การจัดการข้อมูล" icon="pi pi-check" :model="manageDataItems" class="p-button-warning"></SplitButton>
+						</template>
+					</Toolbar> -->
+					<Link href="/manage_data"
+					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-gray-100">
+						<span class="flex items-center justify-center text-lg text-gray-400">
+							<svg fill="none"
+								 stroke-linecap="round"
+								 stroke-linejoin="round"
+								 stroke-width="2"
+								 viewBox="0 0 24 24"
+								 stroke="currentColor"
+								 class="h-6 w-6">
+								<path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+							</svg>
+						</span>
+						<span class="ml-3">จัดการข้อมูล</span>
+					</Link>
+				</li>
+				<li class="my-px">
 					<a href="#"
 					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-red-400">
@@ -235,10 +260,41 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
+import Toolbar from 'primevue/toolbar';
+import SplitButton from 'primevue/splitbutton';
 
 export default {
   components: {
-    Link,
-  }
+    Link, Toolbar, SplitButton
+  },
+
+  	setup() {
+        const manageDataItems = ref([
+            {
+                label: 'Update',
+                icon: 'pi pi-refresh'
+            },
+            {
+                label: 'Delete',
+                icon: 'pi pi-times'
+            },
+            {
+                label: 'Vue Website',
+                icon: 'pi pi-external-link',
+                command: () => {
+                    window.location.href = 'https://vuejs.org/'
+                }
+            },
+            {   label: 'Upload',
+                icon: 'pi pi-upload',
+                command: () => {
+                    window.location.hash = "/fileupload"
+                }
+            }
+        ]);
+
+        return { manageDataItems }
+    }
 }
 </script>

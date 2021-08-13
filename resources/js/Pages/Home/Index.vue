@@ -35,63 +35,66 @@
             <div class="grid grid-cols-1 mt-4 mx-5">
                 <div><label for="selectMeetingRoom" class="text-md pr-4">เลือกห้องที่ต้องการ :</label></div>
                 <div>
-                    <Dropdown class="w-full" id="selectMeetingRoom" v-model="selectMeetingRoom" :options="meetingrooms" optionLabel="name" placeholder="เลือกห้องประชุม" />
+                    <Dropdown @change="changeRoom" class="w-full" id="selectMeetingRoom" v-model="selectMeetingRoom" :options="meetingrooms" optionLabel="room_label" placeholder="เลือกห้องประชุม" />
                 </div>
             </div>
 
-            <div class="flex flex-col flex-1 hidden"><img class="object-fill object-center bg-yellow-300 mt-4 mx-5" src="/storage/meeting_room.jpg"></div>
-
-            <div class="grid grid-cols-1 mt-4 mx-5">
-                <div><label for="topicConference" class="text-md pr-4">ชื่อกิจกรรม/หัวข้อการประชุม :</label></div>
-                <div>
-                    <InputText class="w-full" id="topicConference" type="text" v-model="topicConference" />
+            <div class="flex flex-col flex-1" :class="{ hidden: roomPictureIsHidden }"><img class="object-fill object-center bg-yellow-300 mt-4 mx-5" src="/storage/meeting_room.jpg"></div>
+            
+            <!-- แสดงข้อมูลหลังจากห้องที่เลือกตามวันเวลานั้นสามารถทำการจองได้ -->
+            <div :class="{ hidden: notBookingRoom }">
+                <div class="grid grid-cols-1 mt-4 mx-5">
+                    <div><label for="topicConference" class="text-md pr-4">ชื่อกิจกรรม/หัวข้อการประชุม :</label></div>
+                    <div>
+                        <InputText class="w-full" id="topicConference" type="text" v-model="topicConference" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 mt-4 mx-5">
-                <div><label for="moreDetails" class="text-md pr-4">รายละเอียดเพิ่มเติม :</label></div>
-                <div>
-                    <InputText class="w-full" id="moreDetails" type="text" v-model="moreDetails" />
+                <div class="grid grid-cols-1 mt-4 mx-5">
+                    <div><label for="moreDetails" class="text-md pr-4">รายละเอียดเพิ่มเติม :</label></div>
+                    <div>
+                        <InputText class="w-full" id="moreDetails" type="text" v-model="moreDetails" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 mt-4 mx-5">
-                <div><label for="bookerName" class="text-md pr-4">ชื่อผู้รับผิดชอบ :</label></div>
-                <div>
-                    <InputText class="w-full" id="bookerName" type="text" v-model="bookerName" />
+                <div class="grid grid-cols-1 mt-4 mx-5">
+                    <div><label for="bookerName" class="text-md pr-4">ชื่อผู้รับผิดชอบ :</label></div>
+                    <div>
+                        <InputText class="w-full" id="bookerName" type="text" v-model="bookerName" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 mt-4 mx-5">
-                <div><label for="coordinateName" class="text-md pr-4">ชื่อผู้ประสานงาน :</label></div>
-                <div>
-                    <InputText class="w-full" id="coordinateName" type="text" v-model="coordinateName" />
+                <div class="grid grid-cols-1 mt-4 mx-5">
+                    <div><label for="coordinateName" class="text-md pr-4">ชื่อผู้ประสานงาน :</label></div>
+                    <div>
+                        <InputText class="w-full" id="coordinateName" type="text" v-model="coordinateName" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 mt-4 mx-5">
-                <div><label for="phone" class="text-md pr-4">เบอร์โทรติดต่อกลับ :</label></div>
-                <div>
-                    <InputText class="w-full" id="phone" type="text" v-model="phone" />
+                <div class="grid grid-cols-1 mt-4 mx-5">
+                    <div><label for="phone" class="text-md pr-4">เบอร์โทรติดต่อกลับ :</label></div>
+                    <div>
+                        <InputText class="w-full" id="phone" type="text" v-model="phone" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 mt-4 mx-5">
-                <div><label for="accessoriesRequire" class="text-md pr-4">อุปกรณ์ที่ต้องการใช้งาน :</label></div>
-                <div>
-                    <MultiSelect class="w-full" id="accessoriesRequire" v-model="accessoriesRequire" :options="accessories" optionLabel="name" placeholder="เลือกอุปกรณ์เพิ่มเติม" display="chip" />
+                <div class="grid grid-cols-1 mt-4 mx-5">
+                    <div><label for="accessoriesRequire" class="text-md pr-4">อุปกรณ์ที่ต้องการใช้งาน :</label></div>
+                    <div>
+                        <MultiSelect class="w-full" id="accessoriesRequire" v-model="accessoriesRequire" :options="accessories" optionLabel="name" placeholder="เลือกอุปกรณ์เพิ่มเติม" display="chip" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 mt-4 mx-5">
-                <div><label for="foodAndDrink" class="text-md pr-4">อาหารและเครื่องดื่ม :</label></div>
-                <div>
-                    <MultiSelect class="w-full" id="foodAndDrink" v-model="foodAndDrinkRequire" :options="foodAndDrink" optionLabel="name" placeholder="เลือก" display="chip" />
+                <div class="grid grid-cols-1 mt-4 mx-5">
+                    <div><label for="foodAndDrink" class="text-md pr-4">อาหารและเครื่องดื่ม :</label></div>
+                    <div>
+                        <MultiSelect class="w-full" id="foodAndDrink" v-model="foodAndDrinkRequire" :options="foodAndDrink" optionLabel="name" placeholder="เลือก" display="chip" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 mt-4 mx-5">
-                <div><Button label="ตรวจสอบ" class="w-full p-button-outlined"/></div>
+                <div class="grid grid-cols-1 mt-4 mx-5">
+                    <div><Button label="ตรวจสอบ" class="w-full p-button-outlined"/></div>
+                </div>
             </div>
         </div>
     </Layout>
@@ -101,7 +104,7 @@
 
 
 //import Header from '../../Components/Layouts/Header';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Layout from '@/Components/Layouts/Layout';
 import Calendar from 'primevue/calendar';
 import Dropdown from 'primevue/dropdown';
@@ -110,48 +113,38 @@ import InputText from 'primevue/inputtext';
 import MultiSelect from 'primevue/multiselect';
 import Button from 'primevue/button';
 
+import MeetingRoomService from '@/Services/MeetingRoomService';
+
 export default {
     components: {
         Layout, Calendar, Dropdown, InputNumber, InputText, Button, MultiSelect,
     },
-    // created() {
-    //     let today = new Date();
-    //     let month = today.getMonth();
-    //     let year = today.getFullYear();
-    //     let prevMonth = (month === 0) ? 11 : month -1;
-    //     let prevYear = (prevMonth === 11) ? year - 1 : year;
-    //     let nextMonth = (month === 11) ? 0 : month + 1;
-    //     let nextYear = (nextMonth === 0) ? year + 1 : year;
-    //     this.minDate = new Date();
-    //     this.minDate.setMonth(prevMonth);
-    //     this.minDate.setFullYear(prevYear);
-    //     this.maxDate = new Date();
-    //     this.maxDate.setMonth(nextMonth);
-    //     this.maxDate.setFullYear(nextYear);
-
-    //     let invalidDate = new Date();
-    //     invalidDate.setDate(today.getDate() - 1);
-    //     this.invalidDates = [today,invalidDate];
-    // },
+    
     setup() {
+        onMounted(() => {
+            meetingRoomService.value.getAllRoom().then(data => meetingrooms.value = data);
+        })
+
         const startDateTime = ref();
         const endDateTime = ref();
         const selectObjective = ref();
         const objectives = ref([
-            {name: 'ประชุม', code: 'NY'},
-            {name: 'นั่งเล่น', code: 'RM'},
-            {name: 'ประชุมลับ', code: 'LDN'},
-            {name: 'การเรียนการสอน', code: 'IST'},
-            {name: 'สันทนาการ', code: 'PRS'}
+            {name: 'ประชุม', code: 'CON'},
+            {name: 'นั่งเล่น', code: 'PLY'},
+            {name: 'ประชุมลับ', code: 'SEC'},
+            {name: 'การเรียนการสอน', code: 'LER'},
+            {name: 'สันทนาการ', code: 'ACT'}
         ]);
         const selectMeetingRoom = ref();
-        const meetingrooms = ref([
-            {name: 'PK1', code: 'NY'},
-            {name: 'PK2', code: 'RM'},
-            {name: 'PK3', code: 'LDN'},
-            {name: 'PK4', code: 'IST'},
-            {name: 'นวมิทรบพิตร 26 ห้อง 1', code: 'PRS'}
-        ]);
+        const meetingrooms = ref([]);
+        const meetingRoomService = ref(new MeetingRoomService());
+        // const meetingrooms = ref([
+        //     {label: 'PK1', value: 'PK1'},
+        //     {label: 'PK2', value: 'PK2'},
+        //     {label: 'PK3', value: 'PK3'},
+        //     {label: 'PK4', value: 'PK4'},
+        //     {label: 'นวมิทรบพิตร 26 ห้อง 1', value: 'NV1'}
+        // ]);
         const numberPersonal = ref(2);
         const topicConference = ref();
         const moreDetails = ref();
@@ -160,24 +153,37 @@ export default {
         const phone = ref();
         const accessoriesRequire = ref();
         const accessories = ref([
-            {name: 'คอมพิวเตอร์', code: 'NY'},
-            {name: 'LCD Projector', code: 'RM'},
-            {name: 'Visualizer', code: 'LDN'},
-            {name: 'ระบบเสียง', code: 'IST'},
-            {name: 'อื่นๆ', code: 'PRS'}
+            {name: 'คอมพิวเตอร์', code: 'COM'},
+            {name: 'LCD Projector', code: 'LCD'},
+            {name: 'Visualizer', code: 'VIS'},
+            {name: 'ระบบเสียง', code: 'SOU'},
+            {name: 'อื่นๆ', code: 'OTH'}
         ]);
         const foodAndDrinkRequire = ref();
         const foodAndDrink = ref([
-            {name: 'อาหารกลางวัน', code: 'NY'},
-            {name: 'อาหารว่าง', code: 'RM'},
-            {name: 'เครื่องดื่ม', code: 'LDN'},
+            {name: 'อาหารกลางวัน', code: 'LUN'},
+            {name: 'อาหารว่าง', code: 'SNA'},
+            {name: 'เครื่องดื่ม', code: 'DRI'},
         ]);
 
+        const roomPictureIsHidden = ref(true);
+        const notBookingRoom = ref(true);
+
+        function changeRoom() {
+            console.log(selectMeetingRoom.value.room_value);
+            if(selectMeetingRoom.value.value !== "") {
+                roomPictureIsHidden.value = false;
+            }
+
+            notBookingRoom.value = false;
+        }
+
         return {
-                    startDateTime, endDateTime, selectObjective, objectives, numberPersonal, 
-                    selectMeetingRoom, meetingrooms, topicConference, moreDetails, bookerName, 
-                    coordinateName, phone, accessoriesRequire, accessories, foodAndDrinkRequire, foodAndDrink 
-                }
+            startDateTime, endDateTime, selectObjective, objectives, numberPersonal, 
+            selectMeetingRoom, meetingrooms, topicConference, moreDetails, bookerName, 
+            coordinateName, phone, accessoriesRequire, accessories, foodAndDrinkRequire, foodAndDrink,
+            roomPictureIsHidden, notBookingRoom, changeRoom 
+        }
     },
 }
 </script>

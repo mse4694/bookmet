@@ -26,6 +26,7 @@
             <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500 mt-10 mb-4 self-center">รายการจองห้องประชุม</div>
             <!-- Datatable -->
             <div>
+                <!-- <DataTable :value="bookingHistory" responsiveLayout="stack" breakpoint="1024px"> -->
                 <DataTable :value="bookingHistory" responsiveLayout="scroll">
                     <Column v-for="col of columns" :field="col.field" :header="col.header" :key="col.field"></Column>
                 </DataTable>
@@ -59,7 +60,7 @@ export default {
         const startDate = ref();
         const endDate = ref();
         const columns = ref([
-            {field: 'id', header: 'ลำดับ'},
+            {field: 'id', header: 'หมายเลขจอง'},
             {field: 'date', header: 'วันที่'},
             {field: 'time', header: 'เวลา'},
             {field: 'room', header: 'ห้อง'},

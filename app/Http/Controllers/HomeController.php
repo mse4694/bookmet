@@ -15,14 +15,13 @@ class HomeController extends Controller
     public function index()
     {
         // ใช้ การ return หน้า Page มาจาก Javascript
-        return Inertia::render('Home/Index');
+        return Inertia::render('DashBoard/Index');
     }
 
-    public function about()
-    { 
-        return Inertia::render('About/Index'); 
+    public function dashboard()
+    {
+        return Inertia::render('DashBoard/Index');
     }
-
     public function primevue()
     { 
         return Inertia::render('Primevue/Index'); 
@@ -33,9 +32,14 @@ class HomeController extends Controller
         return Inertia::render('Primevue/InputGroup'); 
     }
 
-    public function list_reserv_calendar()
+    public function calendar()
     { 
-        return Inertia::render('ListReservCalendar/Index'); 
+        return Inertia::render('Calendar/Index'); 
+    }
+
+    public function booking_room()
+    {
+        return Inertia::render('Home/Index');
     }
 
     public function booking_monitor()
