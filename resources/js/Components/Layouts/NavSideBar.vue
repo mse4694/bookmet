@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full flex items-start justify-left bg-green-100 py-1">
+    <!-- <div class="h-full flex items-start justify-left bg-green-100 py-1"> -->
 		<div class="flex w-full h-full max-w-sm p-2 bg-white">
 			<ul class="flex flex-col w-full">
 				<li class="my-px">
@@ -255,7 +255,7 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	<!-- </div> -->
 </template>
 
 <script>

@@ -9,13 +9,15 @@
 
 ## About Project
 
-Laravel base project with Inertia, VueJS, Tailwind CSS and Primevue UI Component for vue3
+Laravel base project with Inertia, VueJS, Tailwind CSS, Primevue UI Component, headlessui, primeicon and heroicon for vue3
 
 - [Laravel](https://laravel.com/docs/8.x).
 - [Inertia](https://inertiajs.com/).
 - [VueJS](https://v3.vuejs.org/guide/introduction.html#what-is-vue-js).
 - [Tailwind CSS](https://tailwindcss.com/docs).
 - [Primevue](https://primefaces.org/primevue/showcase/#/setup).
+- [headlessui](https://headlessui.dev/).
+- [heroicons](https://github.com/tailwindlabs/heroicons)
 
 
 ## Install Project and Running on localhost
