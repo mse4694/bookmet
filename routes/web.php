@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,4 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard'
 // Route::get('/primevue/inputgroup', [HomeController::class, 'inputgroup'])->name('inputgroup');
 Route::get('/calendar', [HomeController::class, 'calendar'])->name('calendar');
 Route::get('/booking_monitor', [HomeController::class, 'booking_monitor'])->name('booking_monitor');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');

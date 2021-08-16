@@ -1,9 +1,9 @@
 <template>
     <Layout>
-        <div class="flex flex-col w-full h-full px-2 py-2 bg-gray-100">
+        <div class="flex flex-col w-full h-full px-2 py-2  mb-10 bg-gray-100">
             <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500 mb-4">ภาพรวมหน้าหลัก</div>
             <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-                <MyCard Status="การจองห้อง" Count=" 1024">
+                <MyCard Status="การจองห้อง ทั้งหมด" Count=" 1024">
                     <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path
@@ -12,7 +12,7 @@
                         </svg>
 				    </div>
                 </MyCard>      
-                <MyCard Status="อนุมัติ" Count="900">
+                <MyCard Status="อนุมัติ ทั้งหมด" Count="900">
                     <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path
@@ -21,7 +21,7 @@
                         </svg>
                     </div>
                 </MyCard>
-                <MyCard Status="รออนุมัติ" Count="24">
+                <MyCard Status="รออนุมัติ ทั้งหมด" Count="24">
                     <div class="p-3 mr-4 text-red-500 bg-red-100 rounded-full">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path
@@ -30,7 +30,7 @@
                         </svg>
                     </div>
                 </MyCard>
-                <MyCard Status="ไม่อนุมัติ" Count="100">
+                <MyCard Status="ไม่อนุมัติ ทั้งหมด" Count="100">
                     <div class="p-3 mr-4 text-yellow-500 bg-yellow-100 rounded-full">
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

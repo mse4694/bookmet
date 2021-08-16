@@ -1,15 +1,15 @@
 <template>
-    <!-- <Header /> -->
-    <!-- <NavHeader /> -->
-    <MyNavHeader />
-    <div class="container flex flex-row">
-        <div> 
-            <NavSideBar class="hidden md:block"/>
-        </div>
+    <div>
+        <MyNavHeader />
+        <div class="w-full h-full flex flex-row">
+            <aside>
+                <NavSideBar class="hidden md:block"/>
+            </aside>
 
-        <div class="flex-grow items-start justify-left bg-green-100 px-1 py-1">
-            <slot></slot>    
-        </div>          
+            <div class="h-screen flex-grow items-start justify-left overscroll-y-auto overflow-y-auto">
+                <slot></slot>    
+            </div>          
+        </div>
     </div>
 </template>
 

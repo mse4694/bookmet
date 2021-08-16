@@ -1,10 +1,10 @@
 <template>
     <!-- <div class="h-full flex items-start justify-left bg-green-100 py-1"> -->
-		<div class="flex w-full h-full max-w-sm p-2 bg-white">
+		<div class="flex h-full max-w-sm p-2 bg-blue-100">
 			<ul class="flex flex-col w-full">
 				<li class="my-px">
 					<Link href="/"
-					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 bg-gray-100">
+					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-gray-400">
 							<!-- <svg fill="none"
 								 stroke-linecap="round"
@@ -220,7 +220,7 @@
 							<SplitButton label="การจัดการข้อมูล" icon="pi pi-check" :model="manageDataItems" class="p-button-warning"></SplitButton>
 						</template>
 					</Toolbar> -->
-					<Link href="/manage_data"
+					<Link href="/admin"
 					   class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-gray-100">
 						<span class="flex items-center justify-center text-lg text-gray-400">
 							<svg fill="none"

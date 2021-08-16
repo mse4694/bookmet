@@ -2,8 +2,8 @@
     <Layout> 
         
         <!-- <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500">ติดตามผลการจอง</div> -->
-        <div class="flex flex-col w-full h-full px-2 py-2 bg-white">
-            <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500 mb-4">ติดตามผลการจอง</div>
+        <div class="flex flex-col w-full h-full py-2 mb-10 bg-gray-200 overscroll-y-auto overflow-y-auto">
+            <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500 mb-4 px-2">ติดตามผลการจอง</div>
             <div class="flex flex-col lg:flex-row w-full">
                 <div class="block lg:inline-flex mt-4 mx-5 flex-grow">
                     <label for="startDate" class="flex-none self-end text-md pr-4">ตั้งแต่วันที่ :</label>
@@ -27,7 +27,12 @@
             <!-- Datatable -->
             <div>
                 <!-- <DataTable :value="bookingHistory" responsiveLayout="stack" breakpoint="1024px"> -->
-                <DataTable :value="bookingHistory" responsiveLayout="scroll">
+                <DataTable  :value="bookingHistory" :resizableColumns="true" columnResizeMode="fit" 
+                            :paginator="true" :rows="5"
+                            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                            :rowsPerPageOptions="[5,10,20,50]"
+                            responsiveLayout="scroll" class="px-5 py-5"
+                            currentPageReportTemplate="แสดง {first} ถึง {last} จากทั้งหมด {totalRecords}">
                     <Column v-for="col of columns" :field="col.field" :header="col.header" :key="col.field"></Column>
                 </DataTable>
             </div>
@@ -60,7 +65,7 @@ export default {
         const startDate = ref();
         const endDate = ref();
         const columns = ref([
-            {field: 'id', header: 'หมายเลขจอง'},
+            {field: 'id', header: '#'},
             {field: 'date', header: 'วันที่'},
             {field: 'time', header: 'เวลา'},
             {field: 'room', header: 'ห้อง'},
@@ -68,9 +73,9 @@ export default {
             {field: 'bookerName', header: 'ผู้จอง'},
             {field: 'status', header: 'สถานะ'},
             {field: 'reason', header: 'สาเหตุ'},
-            {field: 'drink', header: 'เครื่องดื่ม'},
-            {field: 'snack', header: 'อาหารว่าง'},
-            {field: 'food', header: 'อาหารกลางวัน'}
+            // {field: 'drink', header: 'เครื่องดื่ม'},
+            // {field: 'snack', header: 'อาหารว่าง'},
+            // {field: 'food', header: 'อาหารกลางวัน'}
         ]);
         const bookingHistory = ref();
         const bookingHistoryService = ref(new BookingHistoryService());

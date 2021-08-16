@@ -1,7 +1,7 @@
 <template>
     <Layout>
-        <div class="w-full h-full px-2 bg-white">
-            <FullCalendar :events="events" :options="calendarOptions" />
+        <div class="w-full h-auto px-2 mb-20 bg-white">
+            <FullCalendar :events="events" :options="calendarOptions"/>
         </div>
     </Layout>
 </template>

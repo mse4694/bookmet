@@ -1,7 +1,7 @@
 <template>
     <Layout> 
         <!-- <div class="text-3xl font-bold">จองห้องประชุม</div> -->
-        <div class="flex flex-col flex-shrink-0 w-full h-full px-2 py-2 bg-white">
+        <div class="flex flex-col flex-shrink-0 w-full h-full px-2 py-2 bg-gray-100">
             <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500">จองห้องประชุม</div>
             <!-- <div class="grid grid-rows-11 grid-flow-col mt-10 mx-5">
                 <div class="col-span-2"><label for="startDateTime" class="text-lg pr-4">เริ่มจองวันที่ ตั้งแต่เวลา :</label></div>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 mt-4 mx-5">
+                <div class="grid grid-cols-1 mt-4 mx-5  mb-20">
                     <div><Button label="ตรวจสอบ" class="w-full p-button-outlined"/></div>
                 </div>
             </div>
