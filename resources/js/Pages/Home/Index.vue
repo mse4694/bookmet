@@ -10,7 +10,7 @@
 
             <div class="grid grid-cols-1 mt-4 mx-5">
                 <div><label for="startDateTime" class="col-span-1 text-md pr-4">เริ่มจองวันที่ ตั้งแต่เวลา :</label></div>
-                <div class="col-span-1">
+                <div class="col-span-1 w-full">
                     <Calendar class="w-full" id="startDateTime" v-model="startDateTime" :monthNavigator="true" :yearNavigator="true" yearRange="2000:2030" :showIcon="true" :showButtonBar="true" :showTime="true" hourFormat="24" />
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
 
 import 'primevue/resources/themes/saga-blue/theme.css';   // theme
 //import 'primevue/resources/themes/vela-blue/theme.css';   // theme
@@ -11,8 +12,10 @@ import 'primevue/resources/themes/saga-blue/theme.css';   // theme
 
 import 'primevue/resources/primevue.min.css';             // core css
 import 'primeicons/primeicons.css';                       // icons
+import { RouterLink } from 'vue-router';
 
 InertiaProgress.init();
+
 
 createInertiaApp({
   resolve: name => require(`./Pages/${name}`),
@@ -66,6 +69,9 @@ createInertiaApp({
         ripple: true
         }
       )
+      //.use(RouterLink)
+      .use(ToastService)
+      .component('RouterLink', RouterLink)
       .mount(el);
   },
 });
