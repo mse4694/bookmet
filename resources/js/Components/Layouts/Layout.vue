@@ -19,7 +19,7 @@
             </div>
  
             <div class="flex flex-col w-full">
-                <div class="block md:hidden">
+                <div class="block md:hidden w-full">
                     <PrimeNavHeader />
                 </div>
                 <div class="w-full ">

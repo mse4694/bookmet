@@ -1,5 +1,7 @@
 <template>
+    <Layout>
     <div>
+        <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500 mt-4 mb-4">ข้อมูลห้องประชุม</div>
         <div class="card">
             <Toolbar>
                 <template #left>
@@ -73,6 +75,7 @@
 	</div>
 
     <Toast position="top-right" />
+    </Layout>
 </template>
 
 <script>
