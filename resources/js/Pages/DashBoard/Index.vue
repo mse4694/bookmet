@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <div class="flex flex-col w-full h-full px-2 py-2  mb-10 bg-gray-100">
+        <div class="flex flex-col h-full px-2 py-2 bg-gray-200 ">
             <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500 mb-4">ภาพรวมหน้าหลัก</div>
             <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
                 <MyCard Status="การจองห้อง ทั้งหมด" Count=" 1024">

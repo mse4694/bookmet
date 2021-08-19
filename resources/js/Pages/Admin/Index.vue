@@ -1,51 +1,11 @@
 <template>
     <Layout>
-        <div class="flex flex-col w-full h-full px-2 py-2  mb-10 bg-gray-100">
-            <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500 mt-5 mb-4">ส่วนผู้ควบคุม</div>
+        <div class="flex flex-col w-full h-full px-2 py-2 bg-gray-100">
+            <div class="text-3xl font-bold border-double border-b-2 border-opacity-25 border-blue-500 mt-4 mb-4">จัดการข้อมูล</div>
 
             <div>
             <Toolbar>
                 <template #left>
-                    <!-- <Menu as="div" class="relative inline-block text-left">
-                        <div>
-                            <MenuButton 
-                                class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-                                >
-                                    จัดการข้อมูลห้องประชุม
-                            </MenuButton>
-                        </div>
-                        <transition
-                            enter-active-class="transition duration-100 ease-out"
-                            enter-from-class="transform scale-95 opacity-0"
-                            enter-to-class="transform scale-100 opacity-100"
-                            leave-active-class="transition duration-75 ease-in"
-                            leave-from-class="transform scale-100 opacity-100"
-                            leave-to-class="transform scale-95 opacity-0"
-                        >
-                        <MenuItems
-                            class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                        >
-                        <div class="px-1 py-1">
-                        <MenuItem v-slot="{ active }">
-                            <a :class='{ "bg-blue-500": active }' href="/account-settings">
-                            Account
-                            </a>
-                        </MenuItem>
-                        <MenuItem v-slot="{ active }">
-                            <a :class='{ "bg-blue-500": active }' href="/account-settings">
-                            Documentation
-                            </a>
-                        </MenuItem>
-                        <MenuItem disabled>
-                            <span class="opacity-75">Invite(coming soon!)</span>
-                        </MenuItem>
-                        </div>
-
-                        </MenuItems>
-                        
-                        </transition>
-                    </Menu> -->
-
                     <!-- <div class="mr-2"><Button label="New" icon="pi pi-plus" /></div>
                     <div class="mr-2"><Button label="Upload" icon="pi pi-upload" class="p-button-success" /></div>
                     <div class="mr-2"><i class="pi pi-bars p-toolbar-separator" /></div> -->
@@ -111,25 +71,18 @@
 
 <script>
 import { ref } from 'vue';
-import Layout from '@/Components/Layouts/Layout';
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import Toolbar from 'primevue/toolbar';
-import Button from 'primevue/button';
 import SplitButton from 'primevue/splitbutton';
 import Menu from 'primevue/menu';
-
-//import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 
 import ManageRooms from '@/Pages/Admin/ManageRooms';
 
 export default {
     components: {
-        Layout, TabView, TabPanel, Toolbar, Button, SplitButton, ManageRooms,
+        TabView, TabPanel, Toolbar, SplitButton, ManageRooms,
         Menu,
-        // MenuButton,
-        // MenuItems,
-        // MenuItem,
     },
     setup() {
 
@@ -160,7 +113,8 @@ export default {
             {   label: 'Upload',
                 icon: 'pi pi-upload',
                 command: () => {
-					window.location.hash = "/"
+                    window.location.href = "http://localhost:8000"
+					//window.location.hash = "http://localhost:8000"
 				}
             }
         ]);
