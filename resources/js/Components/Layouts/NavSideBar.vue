@@ -170,22 +170,22 @@ export default {
 		const manageDataItems = ref([
 			{
 				label: 'ข้อมูลห้องประชุม',
-				icon: 'pi pi-refresh',
+				icon: 'pi pi-book',
 				url: 'http://localhost:8000/admin-manage-room'
 			},
 			{
 				label: 'วัตถุประสงค์การใช้ห้อง',
-				icon: 'pi pi-times'
+				icon: 'pi pi-send'
 			},
 			{
 				label: 'สิทธิ์ผู้ใช้งาน',
-				icon: 'pi pi-external-link',
+				icon: 'pi pi-user',
 				command: () => {
 					window.location.href = 'https://vuejs.org/'
 				}
 			},
 			{   label: 'ข้อมูลหน่วยงาน',
-				icon: 'pi pi-upload',
+				icon: 'pi pi-globe',
 				command: () => {
 					window.location.hash = "/fileupload"
 				}

@@ -23,7 +23,7 @@
                     <PrimeNavHeader />
                 </div>
                 <div class="w-full ">
-                    <div class="py-2 px-2 justify-items-center place-self-center text-4xl bg-blue-200">ระบบจองห้องประชุม</div>
+                    <div class="py-2 px-2 justify-items-center place-self-center text-4xl font-bold bg-blue-200">ระบบจองห้องประชุม</div>
                     <div class="overscroll-y-auto overflow-y-auto ">
                         <slot></slot>    
                     </div>

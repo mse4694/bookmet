@@ -35,7 +35,7 @@
             <div class="grid grid-cols-1 mt-4 mx-5">
                 <div><label for="selectMeetingRoom" class="text-md pr-4">เลือกห้องที่ต้องการ :</label></div>
                 <div>
-                    <Dropdown @change="changeRoom" class="w-full" id="selectMeetingRoom" v-model="selectMeetingRoom" :options="meetingrooms" optionLabel="room_label" placeholder="เลือกห้องประชุม" />
+                    <Dropdown @change="changeRoom" class="w-full" id="selectMeetingRoom" v-model="selectMeetingRoom" :options="meetingrooms" optionLabel="room_full_name" placeholder="เลือกห้องประชุม" />
                 </div>
             </div>
 

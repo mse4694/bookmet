@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 import { createApp, h } from 'vue';
+import Vuelidate from 'vuelidate';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import PrimeVue from 'primevue/config';
@@ -74,6 +75,7 @@ createInertiaApp({
       )
       //.use(RouterLink)
       .use(ToastService)
+      .use(Vuelidate)
       .component('RouterLink', RouterLink)
       .component('Button', Button)
       .component('Layout', Layout)
