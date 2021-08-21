@@ -26,7 +26,7 @@
 
                 <Column selectionMode="multiple" style="max-width:3rem" :exportable="false"></Column>
 
-                <Column field="id" header="#" :sortable="true" style="max-width:3rem"></Column>
+                <!-- <Column field="id" header="#" :sortable="true" style="max-width:3rem"></Column> -->
 
                 <Column header="รูปห้อง">
                      <template #body="slotProps">
@@ -38,9 +38,9 @@
                 
                 <Column field="room_short_name" header="ชื่อย่อ" :sortable="true" style="min-width:10rem" />
 
-                <Column field="building" header="สถานที่" :sortable="true" style="min-width:10rem">
+                <Column field="building_id" header="สถานที่" :sortable="true" style="min-width:10rem">
                     <template #body="slotProps">
-                        <span>ตึก {{slotProps.data.building}} ชั้น {{slotProps.data.floor}}</span>
+                        <span>ตึก {{getBuildingName(slotProps.data.building_id).full_name}} ชั้น {{slotProps.data.floor}}</span>
                     </template>
                 </Column>
 
@@ -48,13 +48,15 @@
 
                 <Column field="status" header="สถานะ" :sortable="true" style="min-width:5rem">
                     <template #body="slotProps">
-                        <span :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{slotProps.data.status}}</span>
+                        <span v-if="slotProps.data.status === 'READY'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
+                        <span v-else-if="slotProps.data.status === 'RENOVATE'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
+                        <span v-else-if="slotProps.data.status === 'REPAIR'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
                     </template>
                 </Column>
 
                 <Column :exportable="false">
-                    <template #body>
-                        <div class="mr-2"><Button icon="pi pi-pencil" class="p-button-sm p-button-rounded p-button-success"/></div>
+                    <template #body="slotProps">
+                        <div class="mr-2"><Button icon="pi pi-pencil" class="p-button-sm p-button-rounded p-button-success" @click="editProduct(slotProps.data)"/></div>
                         <div><Button icon="pi pi-trash" class="p-button-sm p-button-rounded p-button-warning" /></div>
                     </template>
                 </Column>
@@ -91,11 +93,14 @@
             <div class="grid grid-cols-2 space-x-2 mb-4">
                 <div>
                     <label for="building">ตึก/อาคาร</label>
-                    <Dropdown id="building" v-model="selectedBuilding" :options="building" optionLabel="full_name" placeholder="เลือกตึก/อาคาร" :class="{'p-invalid': submitted && !selectedBuilding}">
+                    <Dropdown id="building" v-model="meetingRoom.building_id" :options="building" optionLabel="full_name" placeholder="เลือกตึก/อาคาร" :class="{'p-invalid': submitted && !selectedBuilding}">
                         <template #value="slotProps">
-                            <div v-if="slotProps.value && slotProps.value.building_id">
-                                <span>{{slotProps.value.full_name}}</span>
+                            <div v-if="slotProps.value">
+                                <span>{{getBuildingName(slotProps.value).full_name}}</span>
                             </div>
+                            <div v-else-if="!slotProps.value">
+							    <span>{{getBuildingName(slotProps.value).full_name}}</span>
+						    </div>
                             <span v-else>
                                 {{slotProps.placeholder}}
                             </span>
@@ -199,7 +204,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { FilterMatchMode } from 'primevue/api';
 import { useToast } from "primevue/usetoast";
 import Toast from 'primevue/toast';
@@ -239,15 +244,28 @@ export default {
 
         const selectedBuilding = ref();
         const building = ref([
-            {id: '1', building_id: '1', full_name: 'อัษฎางค์', short_name: 'อฎ.'},
-	     	{id: '1', building_id: '2', full_name: 'นวมินทรบิตรฯ', short_name: 'นว.'},
+            {id: 11, building_id: 1, full_name: 'อัษฎางค์', short_name: 'อฎ.'},
+	     	{id: 21, building_id: 2, full_name: 'นวมินทรบพิตรฯ', short_name: 'นว.'},
         ]);
 
         const selectedStatus = ref();
         const statuses = ref([
-	     	{label: 'พร้อมใช้งาน', value: 'ready'},
-	     	{label: 'ปิดปรับปรุง', value: 'unready'},
+	     	{label: 'พร้อมใช้', value: 'READY'},
+	     	{label: 'ปรับปรุง', value: 'RENOVATE'},
+            {label: 'ซ่อมแซม', value: 'REPAIR'},
         ]);
+
+        // const thaiStatus = computed( () => {
+            
+        // })
+        const thaiStatus = (inputStatus) => {
+            return statuses.value.find(status=>status.value === inputStatus)
+        };
+
+        const getBuildingName = (input_building_id) => {
+            //console.log(input_building_id)
+            return building.value.find(bname=>bname.building_id === input_building_id)
+        };
 
         const confirmDeleteSelected = () => {
             deleteMeetingRoomsDialog.value = true;
@@ -282,7 +300,7 @@ export default {
             } else {
                 meetingRoom.value.building = selectedBuilding.value.building_id;
                 meetingRoom.value.status = selectedStatus.value.value;
-                console.log(meetingRoom.value);
+                //console.log(meetingRoom.value);
                 meetingRooms.value.push(meetingRoom.value);
                 meetingRoomDialog.value = false;
                 meetingRoom.value = {};
@@ -308,13 +326,19 @@ export default {
             // }
         };
 
+        const editProduct = (mRoom) => {
+            meetingRoom.value = {...mRoom};
+            //console.log(meetingRoom.value)
+            meetingRoomDialog.value = true;
+        };
+
         return { 
             dt, meetingRooms, meetingRoom, 
             selectedMeetingRooms, filters, submitted,
             deleteMeetingRoomsDialog, building, selectedBuilding, selectedStatus,
             meetingRoomDialog, statuses, 
             openNew, hideDialog, confirmDeleteSelected, deleteSelectedMeetingRooms,    //Method
-            saveMeetingRoom,  //Method
+            saveMeetingRoom, editProduct, thaiStatus, getBuildingName  //Method
         }
     }
 }
@@ -331,7 +355,11 @@ export default {
     background-color: aquamarine;
 }
 
-.status-unready {
+.status-renovate {
     background-color:bisque;
+}
+
+.status-repair {
+    background-color:lightpink;
 }
 </style>
