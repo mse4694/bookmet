@@ -93,20 +93,20 @@
             <div class="grid grid-cols-2 space-x-2 mb-4">
                 <div>
                     <label for="building">ตึก/อาคาร</label>
-                    <Dropdown id="building" v-model="meetingRoom.building_id" :options="building" optionLabel="full_name" placeholder="เลือกตึก/อาคาร" :class="{'p-invalid': submitted && !selectedBuilding}">
+                    <Dropdown id="building" v-model="meetingRoom.building_id" :options="building" optionLabel="full_name" placeholder="เลือกตึก/อาคาร" :class="{'p-invalid': submitted && !meetingRoom.building_id}">
                         <template #value="slotProps">
-                            <div v-if="slotProps.value">
-                                <span>{{getBuildingName(slotProps.value).full_name}}</span>
+                            <div v-if="slotProps.value && slotProps.value.full_name">
+                                <span>{{slotProps.value.full_name}}</span>
                             </div>
-                            <div v-else-if="!slotProps.value">
-							    <span>{{getBuildingName(slotProps.value).full_name}}</span>
-						    </div>
+                            <div v-else-if="slotProps.value && !slotProps.value.full_name">
+                                <span>{{getBuildingName(meetingRoom.building_id).full_name}}</span>
+                            </div>
                             <span v-else>
                                 {{slotProps.placeholder}}
                             </span>
                         </template>
 				    </Dropdown>
-                    <small class="p-error" v-if="submitted && !selectedBuilding">จำเป็นต้องเลือก ตึก/อาคาร</small>
+                    <small class="p-error" v-if="submitted && !meetingRoom.building_id">จำเป็นต้องเลือก ตึก/อาคาร</small>
                 </div>
                 <div>
                     <label for="floor">ชั้น</label>
@@ -118,17 +118,20 @@
             <div class="grid grid-cols-2 space-x-2 mb-4">
                 <div>
                     <label for="status">สถานะการใช้งาน</label>
-                    <Dropdown id="status" v-model="selectedStatus" :options="statuses" optionLabel="label" placeholder="เลือกสถานะ" :class="{'p-invalid': submitted && !selectedStatus}">
+                    <Dropdown id="status" v-model="meetingRoom.status" :options="statuses" optionLabel="label" placeholder="เลือกสถานะ" :class="{'p-invalid': submitted && !meetingRoom.status}">
                         <template #value="slotProps">
                             <div v-if="slotProps.value && slotProps.value.value">
-                                <span>{{slotProps.value.label}}</span>
+                                <span :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + slotProps.value.value.toLowerCase()">{{ slotProps.value.label }}</span>
+                            </div>
+                            <div v-else-if="slotProps.value && !slotProps.value.value">
+                                <span :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + meetingRoom.status.toLowerCase()">{{ thaiStatus(meetingRoom.status).label }}</span>
                             </div>
                             <span v-else>
                                 {{slotProps.placeholder}}
                             </span>
                         </template>
 				    </Dropdown>
-                    <small class="p-error" v-if="submitted && !selectedStatus">จำเป็นต้องเลือกสถานะการใช้งาน</small>
+                    <small class="p-error" v-if="submitted && !meetingRoom.status">จำเป็นต้องเลือกสถานะการใช้งาน</small>
                 </div>
                 <div>
                     <label for="room_size">รองรับผู้เข้าร่วมประชุม</label>
@@ -142,55 +145,6 @@
                 <Textarea id="description" v-model="meetingRoom.description" required="true" rows="3" cols="20" />
             </div> -->
 
-            <!-- <div>
-				<label for="inventoryStatus" class="p-mb-3">Inventory Status</label>
-				<Dropdown id="inventoryStatus" v-model="meetingRoom.inventoryStatus" :options="statuses" optionLabel="label" placeholder="Select a Status">
-					<template #value="slotProps">
-						<div v-if="slotProps.value && slotProps.value.value">
-							<span :class="'meetingRoom-badge status-' +slotProps.value.value">{{slotProps.value.label}}</span>
-						</div>
-						<div v-else-if="slotProps.value && !slotProps.value.value">
-							<span :class="'meetingRoom-badge status-' +slotProps.value.toLowerCase()">{{slotProps.value}}</span>
-						</div>
-						<span v-else>
-							{{slotProps.placeholder}}
-						</span>
-					</template>
-				</Dropdown>
-			</div> -->
-
-            <!-- <div>
-                <label class="p-mb-3">Category</label>
-                <div class="p-formgrid p-grid">
-                    <div class="p-field-radiobutton p-col-6">
-                        <RadioButton id="category1" name="category" value="Accessories" v-model="meetingRoom.category" />
-                        <label for="category1">Accessories</label>
-                    </div>
-                    <div class="p-field-radiobutton p-col-6">
-                        <RadioButton id="category2" name="category" value="Clothing" v-model="meetingRoom.category" />
-                        <label for="category2">Clothing</label>
-                    </div>
-                    <div class="p-field-radiobutton p-col-6">
-                        <RadioButton id="category3" name="category" value="Electronics" v-model="meetingRoom.category" />
-                        <label for="category3">Electronics</label>
-                    </div>
-                    <div class="p-field-radiobutton p-col-6">
-                        <RadioButton id="category4" name="category" value="Fitness" v-model="meetingRoom.category" />
-                        <label for="category4">Fitness</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-formgrid p-grid">
-                <div class="p-field p-col">
-                    <label for="price">Price</label>
-                    <InputNumber id="price" v-model="meetingRoom.price" mode="currency" currency="USD" locale="en-US" />
-                </div>
-                <div class="p-field p-col">
-                    <label for="quantity">Quantity</label>
-                    <InputNumber id="quantity" v-model="meetingRoom.quantity" integeronly />
-                </div>
-            </div> -->
             <template #footer>
                 <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="hideDialog"/>
                 <Button label="Save" icon="pi pi-check" class="p-button-text" @click="saveMeetingRoom" />
@@ -242,13 +196,18 @@ export default {
         });
         const deleteMeetingRoomsDialog = ref(false);
 
-        const selectedBuilding = ref();
+        //const selectedBuilding = ref();
         const building = ref([
             {id: 11, building_id: 1, full_name: 'อัษฎางค์', short_name: 'อฎ.'},
 	     	{id: 21, building_id: 2, full_name: 'นวมินทรบพิตรฯ', short_name: 'นว.'},
         ]);
 
-        const selectedStatus = ref();
+        // const building = ref([
+        //     {building_id: 1, full_name: 'อัษฎางค์'},
+	    //  	{building_id: 2, full_name: 'นวมินทรบพิตรฯ'},
+        // ]);
+
+        //const selectedStatus = ref();
         const statuses = ref([
 	     	{label: 'พร้อมใช้', value: 'READY'},
 	     	{label: 'ปรับปรุง', value: 'RENOVATE'},
@@ -263,7 +222,7 @@ export default {
         };
 
         const getBuildingName = (input_building_id) => {
-            //console.log(input_building_id)
+            //console.log("Input B id = " + input_building_id)
             return building.value.find(bname=>bname.building_id === input_building_id)
         };
 
@@ -294,14 +253,21 @@ export default {
             
             // ใช้ตรวจสอบตัวแปร ว่ามีข้อมูลกรอกเข้ามาหรือไม่ ซึ่งถ้าไม่มีข้อมูล จะขึ้นเป็น undefine
             if(!(meetingRoom.value.room_full_name && meetingRoom.value.room_short_name 
-                && selectedBuilding && meetingRoom.value.room_size && selectedStatus
+                && meetingRoom.value.building_id && meetingRoom.value.room_size && meetingRoom.value.status
                )) {
                 console.log('meetingRoom Object is missing some value');
             } else {
-                meetingRoom.value.building = selectedBuilding.value.building_id;
-                meetingRoom.value.status = selectedStatus.value.value;
-                //console.log(meetingRoom.value);
-                meetingRooms.value.push(meetingRoom.value);
+
+                if(typeof meetingRoom.value.building_id === "object") {
+                    meetingRoom.value.building_id = meetingRoom.value.building_id.building_id;
+                    meetingRoom.value.status = meetingRoom.value.status.value;
+                    console.log(meetingRoom.value);
+                    meetingRooms.value.push(meetingRoom.value);
+                } else {
+                    meetingRoom.value.status = meetingRoom.value.status.value;
+                    console.log(meetingRoom.value);
+                }
+
                 meetingRoomDialog.value = false;
                 meetingRoom.value = {};
             }
@@ -328,14 +294,14 @@ export default {
 
         const editProduct = (mRoom) => {
             meetingRoom.value = {...mRoom};
-            //console.log(meetingRoom.value)
+            console.log(meetingRoom.value)
             meetingRoomDialog.value = true;
         };
 
         return { 
             dt, meetingRooms, meetingRoom, 
-            selectedMeetingRooms, filters, submitted,
-            deleteMeetingRoomsDialog, building, selectedBuilding, selectedStatus,
+            filters, submitted,
+            deleteMeetingRoomsDialog, building, selectedMeetingRooms,
             meetingRoomDialog, statuses, 
             openNew, hideDialog, confirmDeleteSelected, deleteSelectedMeetingRooms,    //Method
             saveMeetingRoom, editProduct, thaiStatus, getBuildingName  //Method
