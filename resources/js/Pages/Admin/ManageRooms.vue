@@ -48,9 +48,11 @@
 
                 <Column field="status" header="สถานะ" :sortable="true" style="min-width:5rem">
                     <template #body="slotProps">
-                        <span v-if="slotProps.data.status === 'READY'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
+                        <!-- <span v-if="slotProps.data.status === 'READY'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
                         <span v-else-if="slotProps.data.status === 'RENOVATE'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
-                        <span v-else-if="slotProps.data.status === 'REPAIR'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
+                        <span v-else-if="slotProps.data.status === 'REPAIR'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span> -->
+                        <!-- <span :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span> -->
+                        <span :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ slotProps.data.status }}</span>
                     </template>
                 </Column>
 
@@ -257,17 +259,21 @@ export default {
                )) {
                 console.log('meetingRoom Object is missing some value');
             } else {
-
-                if(typeof meetingRoom.value.building_id === "object") {
-                    meetingRoom.value.building_id = meetingRoom.value.building_id.building_id;
-                    meetingRoom.value.status = meetingRoom.value.status.value;
+                if(meetingRoom.value.id) {
+                    meetingRoom.value.status = meetingRoom.value.status.value ? meetingRoom.value.status.value : meetingRoom.value.status;
+                    console.log("Edit Data");
+                    console.log(meetingRoom.value.status);
+                    meetingRooms.value[findIndexById(meetingRoom.value.id)] = meetingRoom.value;
                     console.log(meetingRoom.value);
-                    meetingRooms.value.push(meetingRoom.value);
                 } else {
-                    meetingRoom.value.status = meetingRoom.value.status.value;
-                    console.log(meetingRoom.value);
+                    if(typeof meetingRoom.value.building_id === "object") {
+                        console.log("Add New Data");
+                        meetingRoom.value.building_id = meetingRoom.value.building_id.building_id;
+                        meetingRoom.value.status = meetingRoom.value.status.value ? meetingRoom.value.status.value : 'READY';
+                        console.log(meetingRoom.value);
+                        meetingRooms.value.push(meetingRoom.value);
+                    }
                 }
-
                 meetingRoomDialog.value = false;
                 meetingRoom.value = {};
             }
@@ -298,13 +304,25 @@ export default {
             meetingRoomDialog.value = true;
         };
 
+        const findIndexById = (id) => {
+            let index = -1;
+            for (let i = 0; i < meetingRoom.value.length; i++) {
+                if (meetingRoom.value[i].id === id) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+
         return { 
             dt, meetingRooms, meetingRoom, 
             filters, submitted,
             deleteMeetingRoomsDialog, building, selectedMeetingRooms,
             meetingRoomDialog, statuses, 
             openNew, hideDialog, confirmDeleteSelected, deleteSelectedMeetingRooms,    //Method
-            saveMeetingRoom, editProduct, thaiStatus, getBuildingName  //Method
+            saveMeetingRoom, editProduct, thaiStatus, getBuildingName, findIndexById  //Method
         }
     }
 }
