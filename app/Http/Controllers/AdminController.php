@@ -22,6 +22,11 @@ class AdminController extends Controller
         return Inertia::render('Admin/ManageRooms');
     }
 
+    public function manage_objective() 
+    {
+        return Inertia::render('Admin/Objectives');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

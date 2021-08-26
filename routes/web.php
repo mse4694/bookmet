@@ -29,3 +29,4 @@ Route::get('/calendar', [HomeController::class, 'calendar'])->name('calendar');
 Route::get('/booking_monitor', [HomeController::class, 'booking_monitor'])->name('booking_monitor');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin-manage-room', [AdminController::class, 'manage_room'])->name('admin-manage-room');
+Route::get('/objective-manage', [AdminController::class, 'manage_objective'])->name('objective-manage');

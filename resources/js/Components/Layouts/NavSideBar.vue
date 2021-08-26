@@ -175,7 +175,8 @@ export default {
 			},
 			{
 				label: 'วัตถุประสงค์การใช้ห้อง',
-				icon: 'pi pi-send'
+				icon: 'pi pi-send',
+				url: 'http://localhost:8000/objective-manage'
 			},
 			{
 				label: 'สิทธิ์ผู้ใช้งาน',

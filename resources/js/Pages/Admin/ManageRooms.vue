@@ -52,7 +52,7 @@
                         <span v-else-if="slotProps.data.status === 'RENOVATE'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
                         <span v-else-if="slotProps.data.status === 'REPAIR'" :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span> -->
                         <!-- <span :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span> -->
-                        <span :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ slotProps.data.status }}</span>
+                        <span :class="'px-2 border-opacity-50 rounded-sm font-semibold status-' + (slotProps.data.status ? slotProps.data.status.toLowerCase() : '')">{{ thaiStatus(slotProps.data.status).label }}</span>
                     </template>
                 </Column>
 
@@ -261,17 +261,23 @@ export default {
             } else {
                 if(meetingRoom.value.id) {
                     meetingRoom.value.status = meetingRoom.value.status.value ? meetingRoom.value.status.value : meetingRoom.value.status;
+                    meetingRoom.value.building_id = meetingRoom.value.building_id.building_id ? meetingRoom.value.building_id.building_id : meetingRoom.value.building_id;
                     console.log("Edit Data");
-                    console.log(meetingRoom.value.status);
+                    //console.log(meetingRoom.value.status);
+                    // console.log(meetingRoom.value.id);
+                    // console.log(findIndexById(meetingRoom.value.id));
                     meetingRooms.value[findIndexById(meetingRoom.value.id)] = meetingRoom.value;
-                    console.log(meetingRoom.value);
+                    //meetingRooms.value.splice(findIndexById(meetingRoom.value.id), 1, meetingRoom.value)
+                    toast.add({severity:'success', summary: 'Successful', detail: 'แก้ไขข้อมูลห้องประชุมเรียบร้อย', life: 3000});
+                    console.log(meetingRooms.value);
                 } else {
                     if(typeof meetingRoom.value.building_id === "object") {
-                        console.log("Add New Data");
+                        //console.log("Add New Data");
                         meetingRoom.value.building_id = meetingRoom.value.building_id.building_id;
                         meetingRoom.value.status = meetingRoom.value.status.value ? meetingRoom.value.status.value : 'READY';
-                        console.log(meetingRoom.value);
+                        //console.log(meetingRoom.value);
                         meetingRooms.value.push(meetingRoom.value);
+                        toast.add({severity:'success', summary: 'Successful', detail: 'เพิ่มข้อมูลห้องประชุมใหม่เรียบร้อย', life: 3000});
                     }
                 }
                 meetingRoomDialog.value = false;
@@ -306,8 +312,8 @@ export default {
 
         const findIndexById = (id) => {
             let index = -1;
-            for (let i = 0; i < meetingRoom.value.length; i++) {
-                if (meetingRoom.value[i].id === id) {
+            for (let i = 0; i < meetingRooms.value.length; i++) {
+                if (meetingRooms.value[i].id === id) {
                     index = i;
                     break;
                 }
