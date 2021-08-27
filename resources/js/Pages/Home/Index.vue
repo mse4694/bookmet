@@ -106,19 +106,19 @@
 //import Header from '../../Components/Layouts/Header';
 import { ref, onMounted } from 'vue';
 import Layout from '@/Components/Layouts/Layout';
-import Calendar from 'primevue/calendar';
-import Dropdown from 'primevue/dropdown';
-import InputNumber from 'primevue/inputnumber';
-import InputText from 'primevue/inputtext';
-import MultiSelect from 'primevue/multiselect';
-import Button from 'primevue/button';
+// import Calendar from 'primevue/calendar';
+// import Dropdown from 'primevue/dropdown';
+// import InputNumber from 'primevue/inputnumber';
+// import InputText from 'primevue/inputtext';
+// import MultiSelect from 'primevue/multiselect';
+// import Button from 'primevue/button';
 
 import MeetingRoomService from '@/Services/MeetingRoomService';
 
 export default {
-    components: {
-        Layout, Calendar, Dropdown, InputNumber, InputText, Button, MultiSelect,
-    },
+    // components: {
+    //     Layout, Calendar, Dropdown, InputNumber, InputText, Button, MultiSelect,
+    // },
     
     setup() {
         onMounted(() => {

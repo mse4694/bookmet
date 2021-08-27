@@ -146,23 +146,23 @@
 
 import Header from '@/Components/Layouts/Header';
 import NavSideBar from '@/Components/Layouts/NavSideBar';
-import Tooltip from 'primevue/tooltip';
-import Ripple from 'primevue/ripple';
+// import Tooltip from 'primevue/tooltip';
+// import Ripple from 'primevue/ripple';
 
 import { ref } from 'vue';
 
 
 
-import Button from 'primevue/button';
+//import Button from 'primevue/button';
 
 export default {
     components: {
-        Header, NavSideBar, Button,
+        Header, NavSideBar
     },
-    directives: {
-    'tooltip': Tooltip,
-    'ripple': Ripple
-    },
+    // directives: {
+    // 'tooltip': Tooltip,
+    // 'ripple': Ripple
+    // },
     setup() {
         const loading = ref([false, false, false]);
         const load = (index) => {

@@ -122,14 +122,14 @@ import Header from '@/Components/Layouts/Header';
 import {Head} from '@inertiajs/inertia-vue3';
 import NavSideBar from '@/Components/Layouts/NavSideBar';
 import { ref } from 'vue';
-import InputText from 'primevue/inputtext';
-import Button from 'primevue/button';
-import Checkbox from 'primevue/checkbox';
-import RadioButton from 'primevue/radiobutton';
+// import InputText from 'primevue/inputtext';
+// import Button from 'primevue/button';
+// import Checkbox from 'primevue/checkbox';
+// import RadioButton from 'primevue/radiobutton';
 
 export default {
     components: {
-        Head, Header, NavSideBar, InputText, Button, Checkbox, RadioButton,
+        Head, Header, NavSideBar,
     },
     setup() {
         const checked1 = ref(false);

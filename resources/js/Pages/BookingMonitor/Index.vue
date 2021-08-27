@@ -45,15 +45,15 @@
 
 import { ref, onMounted } from 'vue';
 import Layout from '@/Components/Layouts/Layout';
-import Calendar from 'primevue/calendar';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import Button from 'primevue/button';
+// import Calendar from 'primevue/calendar';
+// import DataTable from 'primevue/datatable';
+// import Column from 'primevue/column';
+// import Button from 'primevue/button';
 import BookingHistoryService from '@/Services/BookingHistoryService';
 
 export default {
     components: {
-        Layout, Calendar, Button, DataTable, Column,
+        Layout,
     },
     
     setup() {

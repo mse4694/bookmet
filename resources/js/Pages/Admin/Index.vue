@@ -71,18 +71,18 @@
 
 <script>
 import { ref } from 'vue';
-import TabView from 'primevue/tabview';
-import TabPanel from 'primevue/tabpanel';
-import Toolbar from 'primevue/toolbar';
-import SplitButton from 'primevue/splitbutton';
-import Menu from 'primevue/menu';
+// import TabView from 'primevue/tabview';
+// import TabPanel from 'primevue/tabpanel';
+// import Toolbar from 'primevue/toolbar';
+// import SplitButton from 'primevue/splitbutton';
+// import Menu from 'primevue/menu';
 
 import ManageRooms from '@/Pages/Admin/ManageRooms';
 
 export default {
     components: {
-        TabView, TabPanel, Toolbar, SplitButton, ManageRooms,
-        Menu,
+        ManageRooms,
+        // TabView, TabPanel, Toolbar, SplitButton, Menu,
     },
     setup() {
 

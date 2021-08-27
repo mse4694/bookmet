@@ -105,11 +105,11 @@
 
 import { ref } from 'vue';
 import { Link } from '@inertiajs/inertia-vue3';
-import Sidebar from 'primevue/sidebar';
+//import Sidebar from 'primevue/sidebar';
 
 export default {
     components: {
-        Link, Sidebar
+        Link,
     },
 
     setup() {

@@ -48,22 +48,9 @@
 import { ref, onMounted } from 'vue';
 import { FilterMatchMode } from 'primevue/api';
 import { useToast } from "primevue/usetoast";
-import Toast from 'primevue/toast';
-import Toolbar from 'primevue/toolbar';
-import InputText from 'primevue/inputtext';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import Dialog from 'primevue/dialog';
-import Textarea from 'primevue/textarea';
-import Dropdown from 'primevue/dropdown';
-import RadioButton from 'primevue/radiobutton';
-import InputNumber from 'primevue/inputnumber';
 import ObjectiveService from '@/Services/ObjectiveService';
 
 export default {
-    components: {
-        Toolbar, InputText, DataTable, Column, Dialog, useToast, Toast, Textarea, Dropdown, RadioButton, InputNumber  
-    },
 
     setup() {
         onMounted(() => {

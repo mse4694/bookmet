@@ -153,13 +153,13 @@
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
-import Toolbar from 'primevue/toolbar';
-import SplitButton from 'primevue/splitbutton';
-import TieredMenu from 'primevue/tieredmenu';
+// import Toolbar from 'primevue/toolbar';
+// import SplitButton from 'primevue/splitbutton';
+// import TieredMenu from 'primevue/tieredmenu';
 
 export default {
   components: {
-    Link, Toolbar, SplitButton, TieredMenu
+    Link,
   },
 
   	setup() {
@@ -181,9 +181,10 @@ export default {
 			{
 				label: 'สิทธิ์ผู้ใช้งาน',
 				icon: 'pi pi-user',
-				command: () => {
-					window.location.href = 'https://vuejs.org/'
-				}
+				url: 'http://localhost:8000/employee-permission'
+				// command: () => {
+				// 	window.location.href = 'https://vuejs.org/'
+				// }
 			},
 			{   label: 'ข้อมูลหน่วยงาน',
 				icon: 'pi pi-globe',

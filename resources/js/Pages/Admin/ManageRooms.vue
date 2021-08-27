@@ -58,8 +58,8 @@
 
                 <Column :exportable="false">
                     <template #body="slotProps">
-                        <div class="mr-2"><Button icon="pi pi-pencil" class="p-button-sm p-button-rounded p-button-success" @click="editProduct(slotProps.data)"/></div>
-                        <div><Button icon="pi pi-trash" class="p-button-sm p-button-rounded p-button-warning" /></div>
+                        <div class="mr-2"><Button icon="pi pi-pencil" class="p-button-sm p-button-rounded p-button-success" @click="editMeetingRoom(slotProps.data)"/></div>
+                        <div><Button icon="pi pi-trash" class="p-button-sm p-button-rounded p-button-warning" @click="confirmDeleteMeetingRoom(slotProps.data)"/></div>
                     </template>
                 </Column>
 
@@ -75,6 +75,17 @@
             <template #footer>
                 <Button label="ไม่ใช่" icon="pi pi-times" @click="deleteMeetingRoomsDialog = false"/>
                 <Button label="ใช่" icon="pi pi-check" class="p-button-raised p-button-text p-button-danger" @click="deleteSelectedMeetingRooms" />
+            </template>
+        </Dialog>
+
+        <Dialog v-model:visible="deleteMeetingRoomDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+            <div class="confirmation-content">
+                <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
+                <span v-if="meetingRoom">คุณต้องการลบห้องประชุม <b>{{meetingRoom.room_full_name}}</b>?</span>
+            </div>
+            <template #footer>
+                <Button label="ไม่" icon="pi pi-times" class="p-button-text" @click="deleteMeetingRoomDialog = false"/>
+                <Button label="ใช่" icon="pi pi-check" class="p-button-text" @click="deleteMeetingRoom" />
             </template>
         </Dialog>
 
@@ -163,22 +174,22 @@
 import { ref, onMounted, computed } from 'vue';
 import { FilterMatchMode } from 'primevue/api';
 import { useToast } from "primevue/usetoast";
-import Toast from 'primevue/toast';
-import Toolbar from 'primevue/toolbar';
-import InputText from 'primevue/inputtext';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import Dialog from 'primevue/dialog';
-import Textarea from 'primevue/textarea';
-import Dropdown from 'primevue/dropdown';
-import RadioButton from 'primevue/radiobutton';
-import InputNumber from 'primevue/inputnumber';
+// import Toast from 'primevue/toast';
+// import Toolbar from 'primevue/toolbar';
+// import InputText from 'primevue/inputtext';
+// import DataTable from 'primevue/datatable';
+// import Column from 'primevue/column';
+// import Dialog from 'primevue/dialog';
+// import Textarea from 'primevue/textarea';
+// import Dropdown from 'primevue/dropdown';
+// import RadioButton from 'primevue/radiobutton';
+// import InputNumber from 'primevue/inputnumber';
 import MeetingRoomService from '@/Services/MeetingRoomService';
 
 export default {
-    components: {
-        Toolbar, InputText, DataTable, Column, Dialog, useToast, Toast, Textarea, Dropdown, RadioButton, InputNumber  
-    },
+    // components: {
+    //     Toolbar, InputText, DataTable, Column, Dialog, useToast, Toast, Textarea, Dropdown, RadioButton, InputNumber  
+    // },
 
     setup() {
         onMounted(() => {
@@ -196,6 +207,7 @@ export default {
         const filters = ref({
             'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
         });
+        const deleteMeetingRoomDialog = ref(false);
         const deleteMeetingRoomsDialog = ref(false);
 
         //const selectedBuilding = ref();
@@ -232,11 +244,24 @@ export default {
             deleteMeetingRoomsDialog.value = true;
         };
 
+        const confirmDeleteMeetingRoom = (mtr) => {
+            meetingRoom.value = mtr;
+            deleteMeetingRoomDialog.value = true;
+        }
+
         const deleteSelectedMeetingRooms = () => {
             meetingRooms.value = meetingRooms.value.filter(val => !selectedMeetingRooms.value.includes(val));
             deleteMeetingRoomsDialog.value = false;
             selectedMeetingRooms.value = null;
             toast.add({severity:'success', summary: 'สำเร็จ', detail: 'ห้องประชุมที่เลือก ถูกลบแล้ว', life: 3000});
+        };
+
+        const deleteMeetingRoom = () => {
+            // หาว่าห้องไหนไม่ใช่ห้องที่ลบ ก็จะนำมาแสดง ถ้าใช้กับ DB ก็สั่งลบตรงนี้ แล้วหา ห้องที่มีอยู่มาใหม่ แล้วใส่ตัวแปร ตามเดิม
+            meetingRooms.value = meetingRooms.value.filter(val => val.id !== meetingRoom.value.id); 
+            deleteMeetingRoomDialog.value = false;
+            meetingRoom.value = {};
+            toast.add({severity:'success', summary: 'Successful', detail: 'ห้องประชุมถูกลบเรียบร้อย', life: 3000});
         };
 
         const openNew = () => {
@@ -304,7 +329,7 @@ export default {
             // }
         };
 
-        const editProduct = (mRoom) => {
+        const editMeetingRoom = (mRoom) => {
             meetingRoom.value = {...mRoom};
             console.log(meetingRoom.value)
             meetingRoomDialog.value = true;
@@ -325,10 +350,10 @@ export default {
         return { 
             dt, meetingRooms, meetingRoom, 
             filters, submitted,
-            deleteMeetingRoomsDialog, building, selectedMeetingRooms,
+            deleteMeetingRoomsDialog, deleteMeetingRoomDialog, building, selectedMeetingRooms,
             meetingRoomDialog, statuses, 
-            openNew, hideDialog, confirmDeleteSelected, deleteSelectedMeetingRooms,    //Method
-            saveMeetingRoom, editProduct, thaiStatus, getBuildingName, findIndexById  //Method
+            openNew, hideDialog, confirmDeleteSelected, deleteSelectedMeetingRooms, confirmDeleteMeetingRoom,    //Method
+            saveMeetingRoom, editMeetingRoom, thaiStatus, getBuildingName, findIndexById, deleteMeetingRoom  //Method
         }
     }
 }

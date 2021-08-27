@@ -59,11 +59,11 @@
 <script>
 import { ref, onMounted } from 'vue';
 import Layout from '@/Components/Layouts/Layout';
-import Card from 'primevue/card';
-import Button from 'primevue/button';
-import Badge from 'primevue/badge';
-import Avatar from 'primevue/avatar';
-import AvatarGroup from 'primevue/avatargroup';
+// import Card from 'primevue/card';
+// import Button from 'primevue/button';
+// import Badge from 'primevue/badge';
+// import Avatar from 'primevue/avatar';
+// import AvatarGroup from 'primevue/avatargroup';
 
 //My Utilities
 import MyCard from '@/Components/Utilities/Card';
@@ -72,8 +72,11 @@ import MyCard from '@/Components/Utilities/Card';
 import MeetingRoomService from '@/Services/MeetingRoomService';
 
 export default {
+    // components: {
+    //     Layout, Card, Button, Badge, Avatar, AvatarGroup, MyCard 
+    // },
     components: {
-        Layout, Card, Button, Badge, Avatar, AvatarGroup, MyCard 
+        Layout, MyCard 
     },
     
     setup() {

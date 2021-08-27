@@ -42,11 +42,11 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
-import Divider from 'primevue/divider';
+//import Divider from 'primevue/divider';
 
 export default {
   components: {
-    Link, Divider,
+    Link,
   }
 }
 </script>

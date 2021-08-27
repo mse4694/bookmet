@@ -27,6 +27,11 @@ class AdminController extends Controller
         return Inertia::render('Admin/Objectives');
     }
 
+    public function manage_employee_permission()
+    {
+        return Inertia::render('Admin/EmployeePermission');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

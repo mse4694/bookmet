@@ -10,7 +10,7 @@
 import { ref, onMounted } from 'vue';
 import Layout from '@/Components/Layouts/Layout';
 //import '@fullcalendar/core/vdom' // solves problem with Vite
-import FullCalendar from 'primevue/fullcalendar';
+//import FullCalendar from 'primevue/fullcalendar';
 //import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -20,7 +20,7 @@ import EventService from '@/Services/EventService';
 
 export default {
     components: {
-        Layout, FullCalendar,
+        Layout,
     },
     setup() {
         onMounted(() => {

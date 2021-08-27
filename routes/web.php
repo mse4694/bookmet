@@ -30,3 +30,4 @@ Route::get('/booking_monitor', [HomeController::class, 'booking_monitor'])->name
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin-manage-room', [AdminController::class, 'manage_room'])->name('admin-manage-room');
 Route::get('/objective-manage', [AdminController::class, 'manage_objective'])->name('objective-manage');
+Route::get('/employee-permission', [AdminController::class, 'manage_employee_permission'])->name('employee-permission');

@@ -35,12 +35,12 @@
 <script>
 
 import { ref } from 'vue';
-import Menubar from 'primevue/menubar';
+//import Menubar from 'primevue/menubar';
 
 export default {
-    components: {
-        Menubar
-    },
+    // components: {
+    //     Menubar
+    // },
 
     setup() {
         const items = ref([
