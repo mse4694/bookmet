@@ -29,6 +29,8 @@
                 <Column field="picture" header="ภาพถ่าย" :sortable="true" style="min-width:20rem"> 
                     <template #body="slotProps">
                         <img :src="slotProps.data.picture.medium" width="48px"/>
+                        <!-- <img src="http://randomuser.me/api/portraits/women/66.jpg" :alt="slotProps.data.picture.medium" width="48px"/> -->
+                        <!-- <img src="https://randomuser.me/api/portraits/med/women/95.jpg" width="48px" />  -->
                     </template>
                 </Column>
 
@@ -48,6 +50,11 @@
                 </Column>
 
             </DataTable>
+            <img
+                v-for="user in allEmployee"
+                :key="user.login.uuid"
+                :src="user.picture.large"
+            >
             </div>
         </div>
 	</div>

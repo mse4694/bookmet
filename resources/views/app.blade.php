@@ -7,9 +7,9 @@
     <script src="{{ asset(mix('/js/app.js')) }}" defer></script>
 
     <style>
-      body {
-        overflow: hidden; /* Hide scrollbars */
-      }  
+      /* body { */
+      /* overflow: hidden; /*Hide scrollbars */
+      /* }   */
     </style>
 
   </head>
