@@ -3,6 +3,19 @@
     <div>
         <div class="text-3xl border-double border-b-2 border-opacity-25 border-blue-500 mt-4 mb-4 ml-2">สิทธิ์ผู้ใช้งาน</div>
         <div class="ml-4 mr-4">
+            <div class="flex flex-col md:flex-row">
+                <div class="flex flex-col m-2 w-full">
+                    <span>เลือกหน่วยงาน :</span>
+                    <Dropdown class="w-full" v-model="selectedDepartment" :options="allEmployee" optionLabel="nat" placeholder="เลือกหน่วยงาน" />
+                </div>
+                <div class="flex flex-col m-2 w-full">
+                    <span>หาตามรายชื่อ :</span>
+                    <InputText class="w-full" type="text" v-model="employeeName" />
+                </div>   
+            </div>
+            <div class="mb-2">
+                <Button label="ค้นหา" class="p-button-raised p-button-rounded w-full" />
+            </div>
             <Toolbar>
                 <template #left>
                     <!-- <div class="px-2"><Button label="เพิ่ม" icon="pi pi-plus" class="p-button-success"/></div> -->
@@ -26,21 +39,27 @@
 
                 <Column selectionMode="multiple" style="max-width:3rem" :exportable="false"></Column>
 
-                <Column field="picture" header="ภาพถ่าย" :sortable="true" style="min-width:20rem"> 
+                <Column field="picture" header="ภาพถ่าย" :sortable="true" style="max-width:5rem"> 
                     <template #body="slotProps">
-                        <img :src="slotProps.data.picture.medium" width="48px"/>
-                        <!-- <img src="http://randomuser.me/api/portraits/women/66.jpg" :alt="slotProps.data.picture.medium" width="48px"/> -->
-                        <!-- <img src="https://randomuser.me/api/portraits/med/women/95.jpg" width="48px" />  -->
+                        <img :src="slotProps.data.picture.medium" :alt="slotProps.data.picture.medium" width="48"/>
                     </template>
                 </Column>
 
-                <Column field="nat" header="หน่วยงาน" :sortable="true" style="min-width:20rem" />
+                <Column field="id" header="รหัสประจำตัว" :sortable="true" style="max-width:10rem"> 
+                    <template #body="slotProps">
+                        {{ slotProps.data.id.value }}
+                    </template>
+                </Column>
 
                 <Column field="name" header="ชื่อ - สกุล" :sortable="true" style="min-width:20rem"> 
                     <template #body="slotProps">
                         {{ `${slotProps.data.name.title} ${slotProps.data.name.first} ${slotProps.data.name.last}` }}
                     </template>
                 </Column>
+
+                <Column field="nat" header="หน่วยงาน" :sortable="true" style="max-width:10rem" />
+
+                
 
                 <Column :exportable="false" style="max-width:6rem">
                     <template #body="slotProps">
@@ -50,11 +69,11 @@
                 </Column>
 
             </DataTable>
-            <img
+            <!-- <img
                 v-for="user in allEmployee"
                 :key="user.login.uuid"
                 :src="user.picture.large"
-            >
+            > -->
             </div>
         </div>
 	</div>
@@ -74,6 +93,7 @@ export default {
     setup() {
         onMounted(() => {
             employeeService.value.getAllEmp().then(data => allEmployee.value = data);
+            //getUniqueDepartment();
         })
 
         const filters = ref({
@@ -86,12 +106,34 @@ export default {
         const employeeService = ref(new EmployeeService());
         const selectedEmployees = ref();
         const submitted = ref(false);
+        const department = ref();
+        const selectedDepartment = ref();
+        const employeeName = ref();
+        //const uniqueDepartment = ref([]);
+
+        // const getUniqueDepartment = () => {
+        //     allEmployee.forEach(function(item) {
+        //         let i = uniqueDepartment.value.findIndex(x => x.nat == item.nat);
+        //         if(i <= -1){
+        //             uniqueDepartment.value.push({dep: item.nat});
+        //         }
+        //     });
+        // };
+    
+
+        // console.log(uniqueDepartment);
+
+        //console.log(allEmployee.value);
 
         return { 
             dt, toast,
             employee, allEmployee,
             filters, submitted,
             selectedEmployees,
+            selectedDepartment,
+            employeeName,
+            department,
+            //getUniqueDepartment
         }
     }
 }
