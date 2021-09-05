@@ -6,7 +6,7 @@
             <div class="flex flex-col md:flex-row">
                 <div class="flex flex-col m-2 w-full">
                     <span>เลือกหน่วยงาน :</span>
-                    <Dropdown class="w-full" v-model="selectedDepartment" :options="allEmployee" optionLabel="nat" placeholder="เลือกหน่วยงาน" />
+                    <Dropdown class="w-full" v-model="selectedDepartment" :options="uniqueDepartment" optionLabel="nat" placeholder="เลือกหน่วยงาน" />
                 </div>
                 <div class="flex flex-col m-2 w-full">
                     <span>หาตามรายชื่อ :</span>
@@ -14,7 +14,7 @@
                 </div>   
             </div>
             <div class="mb-2">
-                <Button label="ค้นหา" class="p-button-raised p-button-rounded w-full" />
+                <Button label="ค้นหา" class="p-button-raised p-button-rounded w-full" @click="getUniqueDepartment"/>
             </div>
             <Toolbar>
                 <template #left>
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { FilterMatchMode } from 'primevue/api';
 import { useToast } from "primevue/usetoast";
 import EmployeeService from '@/Services/EmployeeService';
@@ -109,21 +109,29 @@ export default {
         const department = ref();
         const selectedDepartment = ref();
         const employeeName = ref();
-        //const uniqueDepartment = ref([]);
+        const uniqueDepartment = ref([]);
 
-        // const getUniqueDepartment = () => {
-        //     allEmployee.forEach(function(item) {
-        //         let i = uniqueDepartment.value.findIndex(x => x.nat == item.nat);
+        // const uniqueDepartment = computed(() => {
+        //     let uniqArr = [];
+        //     allEmployee.value.forEach(function(item) {
+        //         let i = uniqArr.findIndex(x => x.nat == item.nat);
         //         if(i <= -1){
-        //             uniqueDepartment.value.push({dep: item.nat});
+        //             uniqArr.push({nat: item.nat});
         //         }
         //     });
-        // };
-    
+        //     return uniqArr;
+        // });
 
-        // console.log(uniqueDepartment);
-
-        //console.log(allEmployee.value);
+        const getUniqueDepartment = () => {
+            
+            allEmployee.value.forEach(function(item) {
+                let i = uniqueDepartment.value.findIndex(x => x.nat == item.nat);
+                if(i <= -1){
+                    uniqueDepartment.value.push({nat: item.nat});
+                }
+            });
+            console.log(uniqueDepartment.value);
+        };
 
         return { 
             dt, toast,
@@ -133,7 +141,8 @@ export default {
             selectedDepartment,
             employeeName,
             department,
-            //getUniqueDepartment
+            uniqueDepartment,
+            getUniqueDepartment
         }
     }
 }
